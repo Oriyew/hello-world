@@ -39,7 +39,7 @@ standard_deviation
 + The standard deviation of the daily returns of the S&P index during this period is `r sd(data$SPY_returns) *100`%. 
 
 ##S&P Prices
-```{r}
+```{r message = FALSE}
 #install.packages("tidyverse")
 library(tidyverse)
 ggplot(data = data, aes(x = date, y = SPY_prices)) +
