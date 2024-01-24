@@ -19,4 +19,41 @@ data = readRDS("data/wk2_stocks.rds")
 str(data)
 
 ```
+##statistics on returns
+```{r}
+cumulative_returns = sum(data$SPY_returns) *100
+cumulative_returns
+```
+```{r}
+average_return = mean(data$SPY_returns) *100
+average_return
+
+standard_deviation = sd(data$SPY_returns) *100
+standard_deviation
+```
+
++ The cumulative returns of the S&P index during this period is `r sum(data$SPY_returns) *100`%.
+
++ The average daily returns of the S&P index during this period is `r mean(data$SPY_returns) *100`%.
+
++ The standard deviation of the daily returns of the S&P index during this period is `r sd(data$SPY_returns) *100`%. 
+
+##S&P Prices
+```{r}
+#install.packages("tidyverse")
+library(tidyverse)
+ggplot(data = data, aes(x = date, y = SPY_prices)) +
+  geom_line()
+```
+##S&P Yearly Returns
+```{r}
+data %>%
+  mutate(year = year(date)) %>%
+  filter(year>= 2001 & year <= 2023) %>%
+  group_by(year) %>%
+  summarize(yr_return = sum(SPY_returns)*100) %>%
+  ggplot(aes(x = year, y = yr_return)) +
+  geom_col()
+
+```
 
